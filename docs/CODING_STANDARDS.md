@@ -22,3 +22,5 @@
 - Keep services and API logic outside page components.
 - Use `providers/` for future cross-cutting concerns.
 - Never rely on client-side validation for security; repeat validation and authorization on the server.
+- API routes use `createApiRoute` and the standard response envelope.
+- Keep Prisma access inside `server/repositories`; services own use-case orchestration.

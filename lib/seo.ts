@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { seoDefaults } from "@config/seo";
-import { ROUTES } from "@constants/routes";
 import type { PageMetadataOptions } from "../types/seo";
 
 export function createCanonical(slug?: string) {

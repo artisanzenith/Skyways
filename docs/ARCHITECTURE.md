@@ -44,3 +44,5 @@ When dashboards and operations features are introduced, use route groups and fea
 - `lib/`: utilities, loading helpers, validation schema, error handling.
 - `providers/`: placeholder providers for future feature integration.
 - `hooks/`: reusable client logic such as breakpoint detection.
+- `server/`: server-only API standards, actions, data access, and infrastructure provider boundaries.
+- `prisma/`: PostgreSQL foundation schema, future migrations, and seed entry point.

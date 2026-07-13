@@ -1,0 +1,7 @@
+import { ZodError } from "zod";
+export class AppError extends Error { constructor(message: string, public readonly statusCode = 500, public readonly code = "INTERNAL_ERROR", public readonly details?: Record<string, string[]>) { super(message); this.name = "AppError"; } }
+export class ValidationError extends AppError { constructor(message = "The request is invalid.", details?: Record<string, string[]>) { super(message, 422, "VALIDATION_ERROR", details); this.name = "ValidationError"; } }
+export class AuthenticationError extends AppError { constructor(message = "Authentication is required.") { super(message, 401, "UNAUTHENTICATED"); this.name = "AuthenticationError"; } }
+export class AuthorizationError extends AppError { constructor(message = "You are not allowed to perform this action.") { super(message, 403, "FORBIDDEN"); this.name = "AuthorizationError"; } }
+export class DatabaseError extends AppError { constructor(message = "A database operation failed.") { super(message, 500, "DATABASE_ERROR"); this.name = "DatabaseError"; } }
+export function toAppError(error: unknown): AppError { if (error instanceof AppError) return error; if (error instanceof ZodError) { const details = error.issues.reduce<Record<string, string[]>>((result, issue) => { const key = issue.path.join(".") || "form"; result[key] = [...(result[key] ?? []), issue.message]; return result; }, {}); return new ValidationError("Please correct the highlighted fields.", details); } return new AppError("An unexpected error occurred."); }

@@ -1,4 +1,3 @@
-import type { NavItem } from "./../types/site";
 
 export const siteConfig = {
   name: "Skyways Logistics LLC",
