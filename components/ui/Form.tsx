@@ -1,0 +1,21 @@
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import { Search } from "lucide-react";
+import { cn } from "@lib/utils";
+
+const controlStyles = "w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500";
+export type FieldState = "default" | "error" | "success";
+export function Input({ className, state = "default", ...props }: ComponentPropsWithoutRef<"input"> & { state?: FieldState }) { return <input className={cn(controlStyles, state === "error" && "border-red-500 focus:border-red-500 focus:ring-red-100", state === "success" && "border-emerald-500 focus:border-emerald-500 focus:ring-emerald-100", className)} {...props} />; }
+export function Textarea({ className, state = "default", ...props }: ComponentPropsWithoutRef<"textarea"> & { state?: FieldState }) { return <textarea className={cn(controlStyles, "min-h-28 resize-y", state === "error" && "border-red-500", state === "success" && "border-emerald-500", className)} {...props} />; }
+export function Select({ className, state = "default", ...props }: ComponentPropsWithoutRef<"select"> & { state?: FieldState }) { return <select className={cn(controlStyles, state === "error" && "border-red-500", state === "success" && "border-emerald-500", className)} {...props} />; }
+export function Checkbox({ className, ...props }: ComponentPropsWithoutRef<"input">) { return <input type="checkbox" className={cn("h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500", className)} {...props} />; }
+export function Radio({ className, ...props }: ComponentPropsWithoutRef<"input">) { return <input type="radio" className={cn("h-4 w-4 border-slate-300 text-sky-600 focus:ring-sky-500", className)} {...props} />; }
+export function Switch({ className, ...props }: ComponentPropsWithoutRef<"input">) { return <input type="checkbox" role="switch" className={cn("h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition checked:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:cursor-not-allowed", className)} {...props} />; }
+export function SearchInput({ className, ...props }: ComponentPropsWithoutRef<"input">) { return <div className="relative"><Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><Input type="search" className={cn("pl-10", className)} {...props} /></div>; }
+export function PhoneInputPlaceholder(props: ComponentPropsWithoutRef<"input">) { return <Input type="tel" autoComplete="tel" placeholder="(555) 000-0000" {...props} />; }
+export function DatePickerPlaceholder(props: ComponentPropsWithoutRef<"input">) { return <Input type="date" {...props} />; }
+export function FileUploadPlaceholder({ className, children, ...props }: ComponentPropsWithoutRef<"input"> & { children?: ReactNode }) { return <label className={cn("flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-600 hover:bg-slate-100", className)}>{children || "Choose a file or drop it here"}<input type="file" className="sr-only" {...props} /></label>; }
+export function HelperText({ className, ...props }: ComponentPropsWithoutRef<"p">) { return <p className={cn("mt-1 text-sm text-slate-500", className)} {...props} />; }
+export function ValidationMessage({ className, ...props }: ComponentPropsWithoutRef<"p">) { return <p role="status" className={cn("mt-1 text-sm text-slate-600", className)} {...props} />; }
+export function ErrorMessage({ className, ...props }: ComponentPropsWithoutRef<"p">) { return <p role="alert" className={cn("mt-1 text-sm text-red-600", className)} {...props} />; }
+export function SuccessMessage({ className, ...props }: ComponentPropsWithoutRef<"p">) { return <p role="status" className={cn("mt-1 text-sm text-emerald-700", className)} {...props} />; }
+export function RequiredIndicator({ className, ...props }: ComponentPropsWithoutRef<"span">) { return <span aria-hidden="true" className={cn("ml-0.5 text-red-600", className)} {...props}>*</span>; }
